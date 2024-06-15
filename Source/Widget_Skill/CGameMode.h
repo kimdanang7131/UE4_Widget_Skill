@@ -10,4 +10,6 @@ class WIDGET_SKILL_API ACGameMode : public AGameModeBase
 	GENERATED_BODY()
 
 public:
+	ACGameMode();
+
 };
