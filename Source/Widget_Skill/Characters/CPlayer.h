@@ -18,6 +18,10 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 public:
+	FORCEINLINE int32 GetPerkPoints() { return PerkPoints; }
+	FORCEINLINE void SetPerkPoints(const int32& InPerkPoints) { PerkPoints = InPerkPoints; }
+
+public:
 	/** SpringArm */
 	UPROPERTY(EditDefaultsOnly)
 		class USpringArmComponent* SpringArm;
@@ -25,6 +29,9 @@ public:
 	/** Camera */
 	UPROPERTY(EditDefaultsOnly)
 		class UCameraComponent* Camera;
+
+	UPROPERTY(EditDefaultsOnly, Category = "SkillWindowInteract")
+		int32 PerkPoints = 15;
 
 	/*** Player 입력 관련 ***/
 public:
@@ -35,4 +42,9 @@ public:
 	/** 상하좌우 마우스 움직임*/
 	void OnHorizontalLook(float InAxis);
 	void OnVerticalLook(float InAxis);
+
+	void ToggleSkillWindow();
+
+private:
+	bool bSkillWindowVisible = false;
 };

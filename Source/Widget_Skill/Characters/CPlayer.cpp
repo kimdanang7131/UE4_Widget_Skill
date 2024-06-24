@@ -2,7 +2,8 @@
 //////////////////
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
-
+#include "Widget_Skill/CGameInstance.h"
+#include "Widget_Skill/Widgets/CUserWidget_MainWindow.h"
 
 ACPlayer::ACPlayer()
 {
@@ -42,6 +43,8 @@ void ACPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	PlayerInputComponent->BindAction("SkillWindow", IE_Pressed, this, &ACPlayer::ToggleSkillWindow);
+
 	PlayerInputComponent->BindAxis("MoveForward", this, &ACPlayer::OnMoveFB);
 	PlayerInputComponent->BindAxis("MoveRight", this, &ACPlayer::OnMoveLR);
 
@@ -77,4 +80,10 @@ void ACPlayer::OnHorizontalLook(float InAxis)
 void ACPlayer::OnVerticalLook(float InAxis)
 {
 	AddControllerPitchInput(InAxis);
+}
+
+void ACPlayer::ToggleSkillWindow()
+{
+	bSkillWindowVisible = !bSkillWindowVisible;
+	UCGameInstance::GetMainWindowWidget()->SetSkillWindowVisibility(bSkillWindowVisible);
 }
